@@ -13,14 +13,21 @@
   int bloops_##name##_offset = offsetof(bloopsaparams, name);
 
 int bloops_params_offset = offsetof(bloopsaphone, params);
-int bloops_offset_min = offsetof(bloopsaparams, volume);s
+int bloops_offset_min = offsetof(bloopsaparams, volume);
 int bloops_offset_max = offsetof(bloopsaparams, repeat);
 BLOOPS_OFFSET(volume)
+BLOOPS_OFFSET(arp)
 BLOOPS_OFFSET(aspeed)
 BLOOPS_OFFSET(decay)
+BLOOPS_OFFSET(dslide)
 BLOOPS_OFFSET(freq)
+BLOOPS_OFFSET(hpf)
+BLOOPS_OFFSET(hsweep)
 BLOOPS_OFFSET(lpf)
 BLOOPS_OFFSET(lsweep)
+BLOOPS_OFFSET(phase)
+BLOOPS_OFFSET(psweep)
+BLOOPS_OFFSET(punch)
 BLOOPS_OFFSET(repeat)
 BLOOPS_OFFSET(resonance)
 BLOOPS_OFFSET(slide)

@@ -47,11 +47,18 @@ cdef extern from "bloopsapyphone.h":
     int bloops_offset_max
     int bloops_params_offset
     int bloops_volume_offset
+    int bloops_arp_offset
     int bloops_aspeed_offset
     int bloops_decay_offset
+    int bloops_dslide_offset
     int bloops_freq_offset
+    int bloops_hpf_offset
+    int bloops_hsweep_offset
     int bloops_lpf_offset
     int bloops_lsweep_offset
+    int bloops_phase_offset
+    int bloops_psweep_offset
+    int bloops_punch_offset
     int bloops_repeat_offset
     int bloops_resonance_offset
     int bloops_slide_offset
@@ -99,25 +106,45 @@ cdef class Phone:
     cdef bloopsaphone *phone
 
     def __init__(self, type="square"):
-        types = {
-                "square": BLOOPS_SQUARE,
-                "sawtooth": BLOOPS_SAWTOOTH,
-                "sine": BLOOPS_SINE,
-                "noise": BLOOPS_NOISE
-        }
-        if type not in types:
-                raise ValueError("Unknown phone type: '%s'" % (type, ))
-        self.phone.params.type = types[type]
+        self.type = type
 
     def __cinit__(self):
         self.phone = bloops_square()
 
+    property type:
+        def __get__(Phone self):
+            types = {
+                BLOOPS_SQUARE: "square",
+                BLOOPS_SAWTOOTH: "sawtooth",
+                BLOOPS_SINE: "sine",
+                BLOOPS_NOISE: "noise"
+            }
+            return types[self.phone.params.type]
+
+        def __set__(Phone self, type):
+            types = {
+                "square": BLOOPS_SQUARE,
+                "sawtooth": BLOOPS_SAWTOOTH,
+                "sine": BLOOPS_SINE,
+                "noise": BLOOPS_NOISE
+            }
+            if type not in types:
+                raise ValueError("Unknown phone type: '%s'" % (type, ))
+            self.phone.params.type = types[type]
+
     repeat = Accessor(bloops_repeat_offset)
+    arp = Accessor(bloops_arp_offset)
     aspeed = Accessor(bloops_aspeed_offset)
     decay = Accessor(bloops_decay_offset)
+    dslide = Accessor(bloops_dslide_offset)
     freq = Accessor(bloops_freq_offset)
+    hpf = Accessor(bloops_hpf_offset)
+    hsweep = Accessor(bloops_hsweep_offset)
     lpf = Accessor(bloops_lpf_offset)
     lsweep = Accessor(bloops_lsweep_offset)
+    phase = Accessor(bloops_phase_offset)
+    psweep = Accessor(bloops_psweep_offset)
+    punch = Accessor(bloops_punch_offset)
     resonance = Accessor(bloops_resonance_offset)
     slide = Accessor(bloops_slide_offset)
     square = Accessor(bloops_square_offset)
@@ -125,6 +152,7 @@ cdef class Phone:
     sweep = Accessor(bloops_sweep_offset)
     vibe = Accessor(bloops_vibe_offset)
     vspeed = Accessor(bloops_vspeed_offset)
+    volume = Accessor(bloops_volume_offset)
 
     def __dealloc__(self):
         if self.phone:
