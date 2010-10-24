@@ -49,6 +49,7 @@ cdef extern from "bloopsapyphone.h":
     int bloops_volume_offset
     int bloops_arp_offset
     int bloops_aspeed_offset
+    int bloops_attack_offset
     int bloops_decay_offset
     int bloops_dslide_offset
     int bloops_freq_offset
@@ -65,6 +66,7 @@ cdef extern from "bloopsapyphone.h":
     int bloops_square_offset
     int bloops_sustain_offset
     int bloops_sweep_offset
+    int bloops_vdelay_offset
     int bloops_vibe_offset
     int bloops_vspeed_offset
 
@@ -135,6 +137,7 @@ cdef class Phone:
     repeat = Accessor(bloops_repeat_offset)
     arp = Accessor(bloops_arp_offset)
     aspeed = Accessor(bloops_aspeed_offset)
+    attack = Accessor(bloops_attack_offset)
     decay = Accessor(bloops_decay_offset)
     dslide = Accessor(bloops_dslide_offset)
     freq = Accessor(bloops_freq_offset)
@@ -150,6 +153,7 @@ cdef class Phone:
     square = Accessor(bloops_square_offset)
     sustain = Accessor(bloops_sustain_offset)
     sweep = Accessor(bloops_sweep_offset)
+    vdelay = Accessor(bloops_vdelay_offset)
     vibe = Accessor(bloops_vibe_offset)
     vspeed = Accessor(bloops_vspeed_offset)
     volume = Accessor(bloops_volume_offset)
